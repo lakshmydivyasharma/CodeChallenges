@@ -1,5 +1,4 @@
-'Create a function that takes in an array of n length. The function should 
-always return that last item in the array',
+Create a function that takes in an array of n length. The function should always return that last item in the array
 
 
 Parameter:
