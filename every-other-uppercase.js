@@ -27,7 +27,7 @@ function everyOtherUppercase(str){
   // I am initializing my for loop; I am setting my condition where i is less than the string length; and I am incrementing by 1 each time so I will write i++
   for (i=0; i < str.length; i++) {
     // I want to add each oart of the string into my result 
-    // Using the ternary operator, I am setting my "if" to i % 2 ===0, if its true then make my string uppercase, and if it is not true, then make my string lowercase 
+    // Using the ternary operator, I am setting my "if" to i % 2 ===0, if its true then make my character uppercase, and if it is not true, then make my character lowercase 
      result += i % 2 === 0 ? str.charAt(i).toUpperCase() : str.charAt(i).toLowerCase();
   }
   // then i want to return my result 
