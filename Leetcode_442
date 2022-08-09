@@ -1,0 +1,27 @@
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDuplicates = function(nums) {
+    // create our result and let it equal an empty array
+    const result = [];
+    
+    for(let i = 0; i < nums.length; i++){
+        // we want the absolute value bc we are using the addresses between 0 and the range of array, cant have negative (bc its -1 if we visited before)
+        // -1 bc its one indexed, its mapping to the one index so -1 bc its not starting at 0 index, its starting at 1 index
+        let index= Math.abs(nums[i]) - 1;
+        
+        // create a variable for the value which is what it is currently in at nums index
+        let value = nums[index]
+        
+        // is that value less than 0? that means we visited it before so we want to push it into the result
+        
+        if (value < 0){
+            result.push(Math.abs(nums[i]));
+        }else{
+            // otherwise make it negative so it knows for next time 
+            nums[index] = -nums[index];
+        }
+    }
+    return result;
+};
