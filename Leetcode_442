@@ -48,3 +48,38 @@ var findDuplicates = function(nums) {
     }
     return result 
 };
+
+
+
+
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ Great way to track the states of things at once 
+ an object can remember details from things that happened before in the code so making recursive calls --
+ so for each value in the array we go back and check again and this way we wont have to do that again 
+ 
+ */
+var findDuplicates = function(nums) {
+    let counts = {};
+    // figure out the count of each value
+    // num of nums is the same as writing for let i < 0; i < nums.length; i++ but with the added first line of the array for free 
+        // for (let i = 0; i < nums.length; nums++) {
+            // let num = nums[i];
+        // }
+    for (let num of nums) {
+        if (counts[num]) {
+            counts[num]++
+        } else {
+            counts[num] = 1
+        }
+    }
+    let arr = []
+    // if the count's value equal to 2, then push it into my counts object 
+    for (let key of Object.keys(counts)) {
+        if (counts[key] === 2) {
+            arr.push(key)
+        }
+    }
+    return arr;
+};
