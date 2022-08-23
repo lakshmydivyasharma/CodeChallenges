@@ -57,44 +57,85 @@ SECOND SOLUTION: OBJECTS
 /**
  * @param {number[]} nums
  * @return {number[]}
- Object method
  
-Why use objects? 
-Key value pair definitions 
+ Object method 
+ 
+ What is a key value pair? 
+ Key: Value 
+ Name of the property: how many times that key occurs 
+ 
+ 
+ [4,3,2,7,8,2,3,1]
+ keys: {4, 3, 2, 7, 8, 1}
+ Key: Value {
+ 4: 1
+ 3: 2 
+ 2: 2
+ 7: 1
+ 8: 1
+ 1: 1 
+ }
+ 
+ Why use objects? 
+ Great way to track the state of things at once 
+ An object can remember details from things that happened before in the code so it makes the call "recursively" 
+ So for each value in the array, we can go back and check again and this way we won't have to go back again and count 
+ 
+ Parameter: nums 
+ 
+ Return: An array with our result of numbers that are duplicates 
+ 
+ Example: Refer to the left / top
+       Input: nums = [4,3,2,7,8,2,3,1]
+       Output: [2,3]
+ 
+ Psuedocode / Edge Cases:
+    First for loop: get the raw count and store that raw count in object 
+     - create an empty object to track the state 
+     - iterate through the array and for each number we are going to set it as a key and then add to its value or give it a 1 
+ 
 
-First for loop: get the raw count
-let variable = empty object
+    Second for loop: go through the KEYS of the object, find which keys have the value of 2, then push those to the solution 
+    - create an empty array --> push duplicates
+    - push() method 
+    - "let key of Object.keys" 
+            keys() method
+            counts the number of keys in an object 
+    - iterate through to see which keys have a value of 2, push that 
+        - if ( something === 2) { push }; return this 
 
 
-Second for loop: goes through the keys of the object, find which ones have a value of 2, then ONLY pushes those to the solution 
+ for (let num of nums){ 
+ THIS DOES BOTH OF THESE THINGS: 
+        for (let i = 0; i < nums.length; i++){ AND let num = nums[i];
 
-So for example, if we have the object let obj = { 3: 1, 4: 5, 6: 2 }  then Object.keys(obj) === [3, 4, 6]
-This means we can use each key to see every value in the array
-Check which ones are two & push those 
-As such, when you get to key = 6 in the loop, you find one where obj[6] === 2 and that's what goes in the array!
-
-keys() method and the length property are used to count the number of keys in an object.
+    
+Edge case - does the order of the output matter? no 
+Edge case - is there a possibility of an empty array? no 
  */
 
+
+
+
 var findDuplicates = function(nums) {
-    let counts = {}; // set a variable to an empty object 
-    for (let num of nums) { // for (let i = 0; i < nums.length; nums++) { AND let num = nums[i];
-        if (counts[num]) {
-            counts[num]++
-        } else {
-            counts[num] = 1
-        }     
+    let countObject = {}; // let the count equal an empty object 
+    for (let num of nums){
+       if (countObject[num]){  
+           countObject[num]++  
+       }else {
+           countObject[num] = 1 
+       }
     }
-    let arr = []
-    for (let key of Object.keys(counts)) { // if the count's value equal to 2, then push it into my counts object 
-        if (counts[key] === 2) {
-            arr.push(key)
-        }
+    
+    let result = [];
+    for (let key of Object.keys(countObject)){
+        if (countObject[key] === 2){ 
+            result.push(key)
+        } 
     }
-    return arr;
+    return result; 
 };
-
-
+    
 
 
 without annotations:
