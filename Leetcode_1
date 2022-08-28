@@ -1,0 +1,33 @@
+https://leetcode.com/problems/two-sum/
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ 
+ parameter - nums, and my target 
+ return - an array with 2 index spots 
+ example - one on the left
+ psuedocode- 
+set a return variable with an empty array 
+two for loops
+1. go through each spot of the array (i)
+2. go through the spot to the right of that and compare it to (i) so lets call this (j) 
+then check if the value of i and value of j  = target
+    so that looks like: 
+    if (nums[i] + nums[j] === target) 
+    then push that into the new array 
+ 
+ */
+var twoSum = function(nums, target) {
+    let result = [];
+    for (let i = 0; i < nums.length; i++){
+        for(let j = i + 1; j < nums.length; j++){
+             if (nums[i] + nums[j] === target) {
+                 result.push(i);
+                 result.push(j);
+             }
+        }
+    }
+    return result;
+};
