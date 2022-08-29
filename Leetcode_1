@@ -31,3 +31,74 @@ var twoSum = function(nums, target) {
     }
     return result;
 };
+
+
+solution 1: 
+var twoSum = function(nums, target) {
+    let result = [];
+    for (let i = 0; i < nums.length; i++){
+        for(let j = i + 1; j < nums.length; j++){
+             if (nums[i] + nums[j] === target) {
+                 result.push(i);
+                 result.push(j);
+             }
+        }
+    }
+    return result;
+};
+
+
+solution 2:
+time complexity: O(N^2) (going through the array once, and then looking at elements one more time) 
+space complexity: O(1) - constnat (no extra memory to solve the problem)
+var twoSum = function(nums, target) {
+    for (let i = 0; i < nums.length; i++){
+        for(let j = i + 1; j < nums.length; j++){
+             if (nums[i] + nums[j] === target) {
+                return [i,j]
+             }
+        }
+    }
+};
+
+
+
+solution 3: Hashmap 
+time complexity = O(N)
+space complexity: O(N) (sacrificed from solution 1 and 2) 
+
+nums = [1, 5, 9]
+target = 10 
+
+map {} as we go through each element of the array, 
+map ( 1:0, 5:1, ) 
+i = 0 / 1 / 2
+value = 1 / 5 / 9
+compliment_pair =
+10 - 1 = 9 
+10  - 5 = 5; we don't see another 5 so we move on
+10 - 9 = 1; wait we HAVE seen one before we we return it 
+[0, 2]
+
+so we ask, is there a key value pair that is 9? 
+
+Notes: 
+if(map[complimentPair] !== undefined){
+The case when map[complementPair] = 0 is the issue. In Javascript, zero 0 is evaluated to false. So to make sure the if statement is only triggered when the key does not exist in the map, we need to check for undefined explicitly.
+
+
+var twoSum = function(nums, target) {
+    var map = {};
+    for (var i =0; i < nums.length; i++){
+        var value = nums[i];
+        var complimentPair = target - value; 
+        if(map[complimentPair] !== undefined){
+            return [map[complimentPair], i];
+        }else {
+            // if we don't see the  complement pair, we want to record the value that we are on 
+            map[value] = i
+        }
+    }
+};
+
+
