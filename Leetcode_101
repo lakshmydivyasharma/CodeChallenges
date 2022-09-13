@@ -1,0 +1,101 @@
+https://leetcode.com/problems/symmetric-tree/
+
+
+Links used to help understand this problem:
+https://www.google.com/search?q=what+is+a+recursive+helper+method&rlz=1C1GCEB_enIN954IN954&oq=what+is+a+helper+recur&aqs=chrome.1.69i57j0i22i30j0i390l4.4635j0j7&sourceid=chrome&ie=UTF-8
+https://www.geeksforgeeks.org/implementation-binary-search-tree-javascript/
+https://www.geeksforgeeks.org/symmetric-tree-tree-which-is-mirror-image-of-itself/
+https://www.google.com/search?q=in+a+binary+tree+what+is+a+root&rlz=1C1GCEB_enIN954IN954&oq=in+a+binary+tree+what+is+a+root+&aqs=chrome..69i57j0i22i30j0i390l4.7616j0j7&sourceid=chrome&ie=UTF-8
+https://stackoverflow.com/questions/67377136/javascript-recursion-with-helper-function
+https://www.youtube.com/watch?v=sAEfcwvnyus&t=218s
+
+
+
+Solution with annotation:
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ 
+ symmatric tree - is this tree symmmetrical? 
+ 
+ example 2 -- the 3 are on the right hand children of the top of the node above them
+ 
+ recurssion 
+ helper method recurssion (little bit longer but easier to understand )
+ 
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+    let res = true; 
+    // this variable will determine if our binary tree is Symmetrical or not 
+    // if it is NOT symmatrical, it will return false
+    // if it IS a symmatrical tree, it will return true 
+    // make sure you put "return res; at the end line 45 and put everything in between
+    function helper(node1, node2) {
+        // check if node1 = node2 (example1, check if 3 === 3 )
+        if (!node1 && !node2){ //if both of them are nothing/null then keep res as true  (a null tree is a null tree when refelcted on itself)
+            return;
+        }
+        if(!node1 || !node2 || node1.val !== node2.val ){
+            // node1.val !== node2.val --> each one of these has values 1, 2, 3, (from example 2 tree) so if any of these conditions are hit then res is false 
+            res = false; // bc we only hit this code is if node is valid and the other isnt so we know it isnt symmatrical
+            // make it false so then you can return false and no more function calls happen after this 
+            return; 
+        }
+        
+        helper(node1.left, node2.right) // mirror thing 
+        helper(node1.right, node2.left) // switching the mirror around to check 
+        // this is the set up for recurssion // now you have to call it line 44 
+    }
+    
+    helper (root, root ) // pass the root node. once this helper function runs it will turn res to false, but if it never turns it false then it will remain true 
+    
+    return res;
+}
+
+
+
+
+
+
+
+
+
+
+Solution without annotations:
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+    let res = true;
+    
+    function helper (node1, node2) {
+        if (!node1 && !node2){
+            return;
+        }
+        if (!node1 || !node2 || node1.val !== node2.val){
+            res = false;
+            return;
+        }
+        
+        helper (node1.left, node2.right);
+        helper (node1.right, node2.left);
+    }
+     helper(root, root);
+    return res;
+}
+
+
